@@ -1,21 +1,24 @@
-import 'package:app_flutter/features/weather/data/repositories/product_repository.dart';
-import 'package:app_flutter/features/weather/data/repositories/product_repository_impl.dart';
-import 'package:app_flutter/features/weather/presentation/pages/product_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/cart_provider.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final ProductRepository productRepository = ProductRepositoryImpl();
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Product App',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: ProductListScreen(productRepository: productRepository),
+    return ChangeNotifierProvider(
+      create: (_) => CartProvider(),
+      child: MaterialApp(
+        title: 'E-Commerce Shop',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomeScreen(),
+      ),
     );
   }
 }
